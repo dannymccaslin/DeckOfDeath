@@ -1,0 +1,83 @@
+body {
+          
+
+}
+input {
+    margin-top: 2px;
+}
+
+#exercise {
+    font-size: 2em;
+    color: red;
+}
+
+.displaydivs {
+    margin: 10px auto;
+}
+
+#holder {
+    text-align: center;
+}
+#cardImg {
+    max-height: 200px;
+}
+.button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+  }
+#next_card {
+    background-color: rgb(96, 123, 243); 
+}
+#next_card:disabled {
+    background-color: #cbcbf2;
+}
+#start_button {
+    background-color: #c91212;
+}
+#start_button:disabled {
+    background-color: #ed9d9d;
+}
+#reload_button {
+    background-color: red;
+}
+.container {
+    width: 20%;
+    clear: both;
+    margin: auto;
+}
+.container input{
+    width: 100%;
+    clear: both;
+}
+.hidden {
+    display: none;
+}
+@media only screen and (min-device-width : 320px) and (max-device-width : 580px) {
+    body {
+      width: 100%;
+      font-size: 3em;
+      background-color: #cccccc;
+    }
+    input {
+        height: 60px;
+        font-size: 100%;
+    }
+
+    #cardImg {
+        max-height: 500px;
+    }
+    .container {
+        width: 70%;
+    }
+    .button {
+        font-size: 2em;
+    }
+  }
