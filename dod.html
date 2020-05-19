@@ -6,10 +6,18 @@
         <title >DECK OF DEATH!!!</title>
     </head>
     <body>
+        <header>
+            <h1>DECK OF DEATH!!!!!</h1>
+            <ul id="nav">
+                <li><a href="https://dannymccaslin.org">Danny's Website</a></li>
+                <li><a href="https://github.com/dannymccaslin/DeckOfDeath">GitHub</a></li>
+            </ul>
+        </header>
         <div class="container">
-        <h1>DECK OF DEATH!!!!!</h1>
-        <p>Enter the exercises you would like to associate with each suit.</p>
+        
+        
         <div id="inputs">
+            <p>Enter the exercises you would like to associate with each suit.</p>
         <Label>Spades: </Label>
         <input id="spade_input"><br>
         <Label>Clubs: </Label>
@@ -25,6 +33,7 @@
        
         <div id="holder">
             <button class="button" id="start_button">Start</button>
+            <button class="button hidden" id="finish_button">Finish</button>
         <div class="displaydivs" id="card">
 
         </div>
@@ -35,6 +44,7 @@
         
         </div>
         <button class="button" id="next_card" disabled >Next Card</button>
+        
         <button class="button hidden" id="reload_button"  >Reload</button>
     </div>
 

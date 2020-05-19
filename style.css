@@ -2,10 +2,30 @@ body {
           
 
 }
+header {
+    text-align: center;
+}
 input {
     margin-top: 2px;
 }
+#nav {
+	margin-top: 1%;
+    padding: 0;
+    display: block;
+}
 
+#nav li {
+	display: inline;
+	
+	margin: 0;
+}
+#nav a {
+    text-decoration: none;
+}
+#nav li + li:before {
+	content: "|";
+	padding: 0 10px;
+}
 #exercise {
     font-size: 2em;
     color: red;
@@ -17,6 +37,7 @@ input {
 
 #holder {
     text-align: center;
+
 }
 #cardImg {
     max-height: 200px;
@@ -59,6 +80,39 @@ input {
 }
 .hidden {
     display: none;
+}
+#finallist {
+    width: 15%;
+    display: inline-block;
+}
+#finallist li {
+    border: 1px solid white;
+    list-style: none;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding: 5px 15px;
+   text-align: left;
+   color: white;
+}
+#finish_button {
+    background-color: lightgreen;
+}
+.blackCard {
+    background-color: black;
+}
+.redCard {
+    background-color: red;
+}
+.summary {
+    font-weight: bold;
+}
+.blackIcon {
+    color: black;
+    -webkit-text-stroke: 1px white ;
+}
+.redIcon {
+    color: red;
+    -webkit-text-stroke: 1px white;
 }
 @media only screen and (min-device-width : 320px) and (max-device-width : 580px) {
     body {
