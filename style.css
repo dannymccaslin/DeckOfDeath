@@ -134,4 +134,10 @@ input {
     .button {
         font-size: 2em;
     }
+    #finallist {
+        margin: auto;
+        width: 90%;
+        font-size: .85rem;
+     
+    }
   }

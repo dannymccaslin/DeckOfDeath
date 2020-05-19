@@ -158,6 +158,7 @@ startButton.onclick = () => {
     handleCards();
     startButton.classList.add('hidden');
     finish_button.classList.remove('hidden');
+    nextCard.classList.remove('hidden');
     
 
 }
@@ -180,6 +181,8 @@ reload.onclick = () => {
 finish_button.onclick = () => {
     nextCard.classList.add('hidden');
     reload.classList.remove('hidden');
+    cardsLeft.classList.add('hidden');
+    exercise.classList.add('hidden');
     collectTime();
     var spadesTime = 0;
     var clubsTime = 0;
