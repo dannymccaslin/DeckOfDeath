@@ -70,10 +70,11 @@ function Card(s,f)  {
     }
 }
 
-function Times (card,suit,time) {
+function Times (card,suit,time, ex) {
     this.card = card;
     this.suit = suit;
     this.totalTime = time;
+    this.exercise = ex;
     this.getCard = () => {
         return this.card;
     };
@@ -140,8 +141,10 @@ var collectTime = () => {
     d = new Date();
     stopTime = d.getTime();
     cardTimer = stopTime - startTime;
+    var cardSuit = deck[0].suit.toLowerCase();
     console.log("Card Timer", cardTimer);
-    var newTime = new Times(deck[0].card, deck[0].suit,cardTimer);
+    var newTime = new Times(deck[0].card, deck[0].suit,cardTimer,workout[cardSuit]);
+    console.log(newTime);
     deckTimes.push(newTime);
 }
 
@@ -184,6 +187,7 @@ finish_button.onclick = () => {
     cardsLeft.classList.add('hidden');
     exercise.classList.add('hidden');
     collectTime();
+    var localDate = new Date();
     var spadesTime = 0;
     var clubsTime = 0;
     var diamondsTime = 0;
@@ -192,6 +196,7 @@ finish_button.onclick = () => {
     carddiv.innerHTML = '<ul id="finallist"></ul>';
     var finalList = document.getElementById('finallist');
     for (var i = 0; i < deckTimes.length; i++ ) {
+
         if (deckTimes[i].getSuit() == "Spades" || deckTimes[i].getSuit() == "Clubs"){
             finalList.innerHTML +=`<li class="blackCard">${deckTimes[i].getCard()} --- ${convertTime(deckTimes[i].getCardTime())}</li>`
         } else {
@@ -221,5 +226,8 @@ finish_button.onclick = () => {
     finalList.innerHTML += `<li class="redCard"><span class="whiteicons">&diams;</span> Diamonds -- ${workout.diamonds} --- ${convertTime(diamondsTime)}</li>`;
     finalList.innerHTML += `<li class="redCard"><span class="whiteicons">&hearts;</span> Hearts --${workout.hearts} --- ${convertTime(heartsTime)}</li>`;
 
-
+    var jsonString = JSON.stringify(deckTimes);
+    console.log(jsonString);
+    localStorage.setItem(localDate,jsonString);
+    
 }

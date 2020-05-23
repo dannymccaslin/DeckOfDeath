@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Records</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- <script src="script.js"></script> -->
+</head>
+<body>
+    <header>
+        <h1>Records</h1>
+        <ul id="nav">
+            <li><a href="dod.html">Deck of Death</a></li>
+            <li><a href="https://dannymccaslin.org">Danny's Website</a></li>
+            <li><a href="https://github.com/dannymccaslin/DeckOfDeath">GitHub</a></li>
+        </ul>
+        <p>The Deck of Death app keeps records in Local Storage. If you clear your browser's cache it will delete your records.
+            Keep this in mind as you go through your workouts.
+        </p>
+    </header>
+    <div id="record">
+    </div>
+    <button id="delete">Delete</button>
+    <script>
+        function n(n){
+            return n > 9 ? "" + n: "0" + n;
+        }
+        var convertTime = (ms) => {
+            // 1- Convert to seconds:
+            var seconds = ms / 1000;
+            // 2- Extract hours:
+            var hours = parseInt( seconds / 3600 ); // 3,600 seconds in 1 hour
+            seconds = seconds % 3600; // seconds remaining after extracting hours
+            // 3- Extract minutes:
+            var minutes = parseInt( seconds / 60 ); // 60 seconds in 1 minute
+            // 4- Keep only seconds not extracted to minutes:
+            seconds = seconds % 60;
+            return `${n(hours)}:${n(minutes)}:${n(seconds.toFixed(2))}`
+        }
+        let timeTotal = 0;
+        let delete_button = document.getElementById('delete');
+        let key = document.getElementById('key');
+        let record = document.getElementById('record');
+        let acc = document.getElementsByClassName('accordion');
+        for (var i = 0; i < localStorage.length; i++) {
+            var keyName = localStorage.key(i);
+            console.log(`key is ${i} and keyname is ${keyName}.`);
+            var keyDate = new Date(keyName);
+            record.innerHTML += `<button class="accordion" id="${keyName}">${keyDate.toDateString()}</button>`;
+            record.innerHTML += `<div class="panel"></div>`;
+            var buttonKey = document.getElementById(keyName);
+            console.log(buttonKey);
+            var panel = buttonKey.nextElementSibling;
+            var spadesTotalTime = 0;
+            var clubsTotalTime = 0;
+            var diamondsTotalTime = 0;
+            var heartsTotalTime = 0;
+            var spadesWorkout = '';
+            var clubsWorkout = '';
+            var diamondsWorkout = '';
+            var heartsWorkout = '';
+            var recordJson = JSON.parse(localStorage.getItem(keyName));
+                for (var j =  0; j < recordJson.length; j++) {
+                    timeTotal += recordJson[j].totalTime;
+                    switch(recordJson[j].suit) {
+                        case "Spades" :
+                            spadesTotalTime += recordJson[j].totalTime;
+                            spadesWorkout = recordJson[j].exercise;
+                            break;
+                        case "Clubs" :
+                            clubsTotalTime += recordJson[j].totalTime;
+                            clubsWorkout = recordJson[j].exercise;
+                            break;
+                        case "Diamonds" :
+                            diamondsTotalTime += recordJson[j].totalTime;
+                            diamondsWorkout = recordJson[j].exercise;
+                            break;
+                        case "Hearts" :
+                            heartsTotalTime += recordJson[j].totalTime;
+                            heartsWorkout = recordJson[j].exercise;
+                            break;
+                    }
+                    if (recordJson[j].suit == 'Clubs' || recordJson[j].suit == 'Spades'){
+                     panel.innerHTML += `<li class='blackCard'>${recordJson[j].card} -- ${recordJson[j].exercise} -- ${convertTime(recordJson[j].totalTime)}</li>`;
+                    } else {
+                        panel.innerHTML += `<li class='redCard'>${recordJson[j].card} --${recordJson[j].exercise} -- ${convertTime(recordJson[j].totalTime)}</li>`;
+
+                    }
+                }
+                panel.innerHTML += `<li class="blackCard summary">Total Time: ${convertTime(timeTotal)}</li>`; 
+                panel.innerHTML += `<li class="blackCard summary">&spades; ${spadesWorkout} -- ${convertTime(spadesTotalTime)}</li>`;
+                panel.innerHTML += `<li class="blackCard summary">&clubs; ${clubsWorkout} -- ${convertTime(clubsTotalTime)}</li>`;
+                panel.innerHTML += `<li class="redCard summary">&diams; ${diamondsWorkout} -- ${convertTime(diamondsTotalTime)}</li>`;
+                panel.innerHTML += `<li class="redCard summary">&hearts; ${heartsWorkout} -- ${convertTime(heartsTotalTime)}</li>`;
+        }
+
+        delete_button.onclick = () => {
+            localStorage.removeItem(0);
+        }
+        for (var i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    /* Toggle between adding and removing the "active" class,
+    to highlight the button that controls the panel */
+    this.classList.toggle("active");
+
+    /* Toggle between hiding and showing the active panel */
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+        
+    </script>
+</body>
+</html>
+
